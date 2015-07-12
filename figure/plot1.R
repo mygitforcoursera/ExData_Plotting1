@@ -1,0 +1,10 @@
+library(lubridate)
+ucidata <- read.table("household_power_consumption.txt",header=TRUE,sep=";",na.strings = "?")
+ucidata$Date <- dmy(ucidata$Date)
+testg <- grep("2007-02-01|2007-02-02",ucidata$Date,value=FALSE)
+w_ds <- ucidata[testg,]
+rm(ucidata)
+rm(testg)
+png(file = "plot1.png", width = 480, height = 480)
+hist(w_ds$Global_active_power,col = 2, main = "Global Active Power", xlab = "Global Active Power (kilowatts)")
+dev.off()
